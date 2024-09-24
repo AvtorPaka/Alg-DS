@@ -2,10 +2,10 @@
 
 ## Демченко Георгий Павлович , БПИ-235
 
-### Analysis | [long_find_max_sum](https://github.com/AvtorPaka/Alg-DS/tree/master/src/BonusTasks/MaxSum/MaxSumImplementation.cpp)
+### 1. Analysis | [long_find_max_sum](https://github.com/AvtorPaka/Alg-DS/tree/master/src/BonusTasks/MaxSum/MaxSumImplementation.cpp)
 
 ```cpp
-static int32_t long_find_max_sum(const std::vector<int32_t> &array, int32_t k) {
+int32_t long_find_max_sum(const std::vector<int32_t> &array, int32_t k) {
     size_t n = array.size();                            // c_1
     int32_t max_sum = INT_MIN;                          // c_2
 
@@ -46,10 +46,10 @@ T(n, \frac{n}{2}) = O\left( \frac{n}{2} \cdot \left(n + 1 - \frac{n}{2} \right)\
 ```
 
 
-### Analysis | [fast_find_max_sum](https://github.com/AvtorPaka/Alg-DS/tree/master/src/BonusTasks/MaxSum/MaxSumImplementation.cpp)
+### 2. Analysis | [fast_find_max_sum](https://github.com/AvtorPaka/Alg-DS/tree/master/src/BonusTasks/MaxSum/MaxSumImplementation.cpp)
 
 ```cpp
-static int32_t fast_find_max_sum(const std::vector<int32_t> &array, int32_t k) {
+int32_t fast_find_max_sum(const std::vector<int32_t> &array, int32_t k) {
     size_t n = array.size();                                // c_1
     int32_t tmp_sum = 0;                                    // c_2
     int32_t max_sum = 0;                                    // c_3
@@ -73,5 +73,5 @@ static int32_t fast_find_max_sum(const std::vector<int32_t> &array, int32_t k) {
 ```
 
 ```math
-T(n, k) =  k \cdot (c_4 + c_5) + (n - k)(c_6 + c_7) + (c_1 + c_2 + c_3) = \newline n \cdot (c_6 + c_7) + k \cdot (c_4 + c_5 - c_6 - c_7) + (c_1 + c_2 + c_3) = \Theta(n) = O(n)
+T(n, k) =  k \cdot (c_4 + c_5) + (n - k)(c_6 + c_7) + (c_1 + c_2 + c_3) \newline = n \cdot (c_6 + c_7) + k \cdot (c_4 + c_5 - c_6 - c_7) + (c_1 + c_2 + c_3) \newline = \Theta(n + k) = \Theta(n) = O(n)
 ```
