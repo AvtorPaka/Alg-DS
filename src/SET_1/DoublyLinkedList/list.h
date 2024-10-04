@@ -5,8 +5,8 @@
 
 struct Node {
 public:
-    Node* prev;
-    Node* next;
+    Node *prev;
+    Node *next;
 
     int value;
 
@@ -15,11 +15,11 @@ public:
         value = 0;
     }
 
-    Node(const int& value): value(value) { next = prev = nullptr; }
+    Node(const int &value) : value(value) { next = prev = nullptr; }
 
-    Node(Node* prev, Node* next, const int& value) : prev(prev), next(next), value(value) { }
+    Node(Node *prev, Node *next, const int &value) : prev(prev), next(next), value(value) {}
 
-    Node(const Node& other) {
+    Node(const Node &other) {
         value = other.value;
 
         next = prev = nullptr;
@@ -31,7 +31,7 @@ class List {
 public:
     List();
 
-    List(const List& other);
+    List(const List &other);
 
     explicit List(std::vector<int> array);
 
@@ -45,13 +45,13 @@ public:
 
     void push_front(int value);
 
-    void insert(Node* pos, int value);
+    void insert(Node *pos, int value);
 
     void pop_front();
 
     void pop_back();
 
-    void erase(Node* pos);
+    void erase(Node *pos);
 
     void clear();
 
@@ -61,9 +61,9 @@ public:
 
     void replace(int old_value, int new_value);
 
-    void copy(const List& other);
+    void copy(const List &other);
 
-    void merge(const List& other);
+    void merge(const List &other);
 
     [[nodiscard]] bool check_cycle() const;
 
@@ -73,8 +73,8 @@ public:
 
     size_t _size;
 
-    Node* head;
-    Node* tail;
+    Node *head;
+    Node *tail;
 };
 
 #endif
