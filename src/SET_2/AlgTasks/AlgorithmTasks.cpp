@@ -356,3 +356,95 @@ AlgorithmTasks::SplitMatrix(const std::vector<std::vector<int64_t>> &matrix, siz
 
     return result;
 }
+
+// Minimal distance between set of 2-dimensional points
+int64_t
+AlgorithmTasks::TwoDimensionalHuecoMundoPassage(std::vector<HuecoMundoPoint> &points, int32_t left, int32_t right) {
+    if (left >= right) {
+        return INT64_MAX;
+    }
+    if (right - 1 == left) {
+        return points[left].SquareDistance(points[right]);
+    }
+
+    int32_t mid = left + (right - left) / 2;
+    int64_t leftPartMinDistance = TwoDimensionalHuecoMundoPassage(points, left, mid);
+    int64_t rightPartMinDistance = TwoDimensionalHuecoMundoPassage(points, mid + 1, right);
+
+    int64_t minDistanceD = std::min(leftPartMinDistance, rightPartMinDistance);
+    int64_t midPointX = points[mid].x;
+
+    std::vector<HuecoMundoPoint> connectivePoints;
+
+
+    for (int32_t i = mid; i >= left; i--) {
+        if (static_cast<int64_t>(std::pow(points[i].x - midPointX, 2.0)) <= minDistanceD) {
+            connectivePoints.push_back(points[i]);
+        } else {
+            break;
+        }
+    }
+
+    for (int32_t i = mid + 1; i <= right; ++i) {
+        if (static_cast<int64_t>(std::pow(points[i].x - midPointX, 2.0)) <= minDistanceD) {
+            connectivePoints.push_back(points[i]);
+        } else {
+            break;
+        }
+    }
+
+    std::sort(connectivePoints.begin(), connectivePoints.end(), PointYComparator{});
+
+    int64_t minConnectiveDistance = INT64_MAX;
+    auto connSize = static_cast<int32_t>(connectivePoints.size());
+
+    for (int32_t i = 0; i < connSize; ++i) {
+        for (int32_t j = 1; j <= 7; ++j) {
+            if (i + j < connSize) {
+                minConnectiveDistance = std::min(minConnectiveDistance,
+                                                 connectivePoints[i].SquareDistance(connectivePoints[i + j]));
+            } else {
+                break;
+            }
+        }
+    }
+
+
+    return std::min(minDistanceD, minConnectiveDistance);
+}
+
+double AlgorithmTasks::TrainToSoulKingsCastle(const std::vector<int32_t> &speedAtTime,
+                                              const std::vector<int32_t> &sumTime,
+                                              const std::vector<int32_t> &sumDistance, int32_t gap, size_t n) {
+    double ans = 0;
+
+    for (int32_t i = 0; i < n + 1; ++i) {
+        double possibleTimeFirst =
+                calculateNewTime(speedAtTime, sumTime, sumDistance, sumDistance[i] + gap) - sumTime[i];
+        ans = std::max(ans, possibleTimeFirst);
+
+        if (sumDistance[i] - gap >= 0) {
+            double possibleTimeSecond =
+                    sumTime[i] - calculateNewTime(speedAtTime, sumTime, sumDistance, sumDistance[i] - gap);
+            ans = std::max(ans, possibleTimeSecond);
+        }
+    }
+
+    return ans;
+}
+
+double AlgorithmTasks::calculateNewTime(const std::vector<int32_t> &speedAtTime, const std::vector<int32_t> &sumTime,
+                                        const std::vector<int32_t> &sumDistance, int32_t needDistance) {
+    if (needDistance > sumDistance.back()) {
+        return sumTime.back();
+    }
+
+    int32_t idx = 0;
+    for (idx = 0; idx < speedAtTime.size(); ++idx) {
+        if (sumDistance[idx] >= needDistance) {
+            break;
+        }
+    }
+
+    return static_cast<double>(sumTime[idx]) - static_cast<double>(sumDistance[idx] - needDistance) / speedAtTime[idx];
+}
