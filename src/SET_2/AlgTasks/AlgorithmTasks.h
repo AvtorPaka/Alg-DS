@@ -49,7 +49,7 @@ public:
         int32_t possibleRight = std::min(right, other.right);
 
         if (possibleLeft > possibleRight) {
-            return {1, 0}; // Суть в right = left - 1, чтобы получалось lenght = 0
+            return {1, 0}; // Суть в right = left - 1, чтобы получалось length = 0
         } else {
             return {possibleLeft, possibleRight};
         }
