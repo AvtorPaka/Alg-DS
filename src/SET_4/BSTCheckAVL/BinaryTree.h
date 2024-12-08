@@ -3,30 +3,30 @@
 
 #include <cstdint>
 
-struct Node {
+struct BSTNode {
 public:
     int32_t key;
-    Node *left;
-    Node *right;
+    BSTNode *left;
+    BSTNode *right;
 
-    Node(int32_t key, Node *right = nullptr, Node *left = nullptr) {
+    BSTNode(int32_t key, BSTNode *right = nullptr, BSTNode *left = nullptr) {
         this->key = key;
         this->right = right;
         this->left = left;
     }
 
-    ~Node() = default;
+    ~BSTNode() = default;
 };
 
 // Binary Tree with check for AVL accuracy
 class BinaryTree {
 private:
-    Node *Insert(Node *curNode, const int32_t &newKey);
+    BSTNode *Insert(BSTNode *curNode, const int32_t &newKey);
 
-    int32_t MaxDepthFromNode(Node *curNode, int32_t curDepth) const;
+    int32_t MaxDepthFromNode(BSTNode *curNode, int32_t curDepth) const;
 
 public:
-    Node *root;
+    BSTNode *root;
 
     BinaryTree();
 
@@ -34,7 +34,7 @@ public:
 
     void Insert(const int32_t &newKey);
 
-    bool IsAVL(Node *rootNode) const;
+    bool IsAVL(BSTNode *rootNode) const;
 };
 
 #endif //IMPLEMENTATIONDATA_BINARYTREE_H

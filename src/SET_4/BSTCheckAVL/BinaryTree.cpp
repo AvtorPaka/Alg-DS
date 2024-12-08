@@ -3,9 +3,9 @@
 #include <cmath>
 #include <algorithm>
 
-Node *BinaryTree::Insert(Node *curNode, const int32_t &newKey)  {
+BSTNode *BinaryTree::Insert(BSTNode *curNode, const int32_t &newKey)  {
     if (curNode == nullptr) {
-        curNode = new Node(newKey);
+        curNode = new BSTNode(newKey);
     } else if (newKey < curNode->key) {
         curNode->left = Insert(curNode->left, newKey);
     } else if (newKey > curNode->key) {
@@ -15,7 +15,7 @@ Node *BinaryTree::Insert(Node *curNode, const int32_t &newKey)  {
     return curNode;
 }
 
-int32_t BinaryTree::MaxDepthFromNode(Node *curNode, int32_t curDepth) const {
+int32_t BinaryTree::MaxDepthFromNode(BSTNode *curNode, int32_t curDepth) const {
     if (curNode == nullptr) {
         return curDepth - 1;
     }
@@ -26,7 +26,7 @@ int32_t BinaryTree::MaxDepthFromNode(Node *curNode, int32_t curDepth) const {
     return maxLocalDepth;
 }
 
-bool BinaryTree::IsAVL(Node *rootNode) const {
+bool BinaryTree::IsAVL(BSTNode *rootNode) const {
     if (rootNode == nullptr) {
         return true;
     }
@@ -41,7 +41,7 @@ void BinaryTree::Insert(const int32_t &newKey)  {
 }
 
 BinaryTree::BinaryTree(const int32_t &key)  {
-    this->root = new Node(key);
+    this->root = new BSTNode(key);
 }
 
 BinaryTree::BinaryTree() {

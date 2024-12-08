@@ -3,15 +3,15 @@
 
 #include "cstdint"
 
-struct Node {
+struct AVLNode {
     int32_t height;
-    Node *left;
-    Node *right;
+    AVLNode *left;
+    AVLNode *right;
     int32_t value;
 
-    Node(int32_t value);
+    AVLNode(int32_t value);
 
-    ~Node();
+    ~AVLNode();
 };
 
 class AVLTree {
@@ -34,41 +34,41 @@ public:
 
     bool empty();
 
-    Node *getRoot();
+    AVLNode *getRoot();
 
     int32_t getSize();
 
     ~AVLTree();
 
 private:
-    Node *root_;
+    AVLNode *root_;
     int32_t size_;
 
-    int32_t getNodeHeight(Node *node);
+    int32_t getNodeHeight(AVLNode *node);
 
-    int32_t balanceFactor(Node *node);
+    int32_t balanceFactor(AVLNode *node);
 
-    void balanceHeight(Node *node);
+    void balanceHeight(AVLNode *node);
 
-    Node *rotateRight(Node *node);
+    AVLNode *rotateRight(AVLNode *node);
 
-    Node *rotateLeft(Node *node);
+    AVLNode *rotateLeft(AVLNode *node);
 
-    Node *balanceNode(Node *node);
+    AVLNode *balanceNode(AVLNode *node);
 
-    Node *insertNode(Node *node, int32_t value);
+    AVLNode *insertNode(AVLNode *node, int32_t value);
 
-    Node *findMinNode(Node *node);
+    AVLNode *findMinNode(AVLNode *node);
 
-    Node *removeMinNode(Node *node);
+    AVLNode *removeMinNode(AVLNode *node);
 
-    Node *removeNode(Node *node, int32_t value);
+    AVLNode *removeNode(AVLNode *node, int32_t value);
 
-    Node *findNode(Node *node, int32_t value);
+    AVLNode *findNode(AVLNode *node, int32_t value);
 
-    void traversalInternal(Node *node, int32_t *array, int32_t *index);
+    void traversalInternal(AVLNode *node, int32_t *array, int32_t *index);
 
-    Node *lowerBoundInternal(Node *current, int32_t value) const;
+    AVLNode *lowerBoundInternal(AVLNode *current, int32_t value) const;
 };
 
 
