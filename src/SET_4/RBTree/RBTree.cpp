@@ -1,9 +1,9 @@
-#include "rbtree.h"
+#include "RBTree.h"
 
 #include <cstdint>
 #include <algorithm>
 
-Node::Node(int32_t key) {
+RBNode::RBNode(int32_t key) {
     this->key = key;
     this->left = this->right = this->parent = nullptr;
     this->color = Color::RED;
@@ -28,12 +28,12 @@ RBTree::RBTree() {
 }
 
 int32_t *RBTree::find(int32_t key) {
-    Node *foundNode = InternalFindNode(this->root, key);
+    RBNode *foundNode = InternalFindNode(this->root, key);
 
     return foundNode == nullptr ? nullptr : &foundNode->key;
 }
 
-Node *RBTree::InternalFindNode(Node *node, int32_t key) {
+RBNode *RBTree::InternalFindNode(RBNode *node, int32_t key) {
     if (node == nullptr) {
         return nullptr;
     }
@@ -51,7 +51,7 @@ Node *RBTree::InternalFindNode(Node *node, int32_t key) {
 }
 
 void RBTree::insert(int32_t key) {
-    Node *newNode = new Node(key);
+    RBNode *newNode = new RBNode(key);
     this->root = insertNodeInternal(this->root, newNode);
     fixInsert(newNode);
 }
@@ -63,12 +63,12 @@ RBTree::RBTree(std::initializer_list<int32_t> list) {
 }
 
 int32_t *RBTree::lowerBound(int32_t key) {
-    Node *lowerBoundNode = lowerBoundInternal(this->root, key);
+    RBNode *lowerBoundNode = lowerBoundInternal(this->root, key);
 
     return lowerBoundNode == nullptr ? nullptr : &lowerBoundNode->key;
 }
 
-void RBTree::DeleteNodesCascade(Node *node) {
+void RBTree::DeleteNodesCascade(RBNode *node) {
     if (node != nullptr) {
         DeleteNodesCascade(node->left);
         DeleteNodesCascade(node->right);
@@ -80,7 +80,7 @@ RBTree::~RBTree() {
     DeleteNodesCascade(this->root);
 }
 
-Node *RBTree::lowerBoundInternal(Node *node, int32_t key) {
+RBNode *RBTree::lowerBoundInternal(RBNode *node, int32_t key) {
     if (node == nullptr) {
         return nullptr;
     }
@@ -92,7 +92,7 @@ Node *RBTree::lowerBoundInternal(Node *node, int32_t key) {
         return lowerBoundInternal(node->right, key);
     }
 
-    Node *tmpNode = lowerBoundInternal(node->left, key);
+    RBNode *tmpNode = lowerBoundInternal(node->left, key);
     if (tmpNode != nullptr) {
         return tmpNode;
     } else {
@@ -100,33 +100,33 @@ Node *RBTree::lowerBoundInternal(Node *node, int32_t key) {
     }
 }
 
-int32_t RBTree::getNodeHeight(Node *node) {
+int32_t RBTree::getNodeHeight(RBNode *node) {
     return node == nullptr ? 0 : node->height;
 }
 
-void RBTree::balanceHeight(Node *&node) {
+void RBTree::balanceHeight(RBNode *&node) {
     if (node != nullptr) {
         node->height =
                 std::max(getNodeHeight(node->left), getNodeHeight(node->right)) + (node->color == Color::BLACK ? 1 : 0);
     }
 }
 
-int32_t RBTree::getNodeSize(Node *node) {
+int32_t RBTree::getNodeSize(RBNode *node) {
     return node == nullptr ? 0 : node->size;
 }
 
-void RBTree::balanceSize(Node *&node) {
+void RBTree::balanceSize(RBNode *&node) {
     if (node != nullptr) {
         node->size = getNodeSize(node->left) + getNodeSize(node->right) + 1;
     }
 }
 
-void RBTree::balanceMetadata(Node *&node) {
+void RBTree::balanceMetadata(RBNode *&node) {
     balanceHeight(node);
     balanceSize(node);
 }
 
-Node* RBTree::insertNodeInternal(Node *rootNode, Node *node) {
+RBNode* RBTree::insertNodeInternal(RBNode *rootNode, RBNode *node) {
     if (rootNode == nullptr) {
         return node;
     }
@@ -143,8 +143,8 @@ Node* RBTree::insertNodeInternal(Node *rootNode, Node *node) {
     return rootNode;
 }
 
-void RBTree::rotateRight(Node *&node) {
-    Node *child = node->left;
+void RBTree::rotateRight(RBNode *&node) {
+    RBNode *child = node->left;
     node->left = child->right;
 
     if (node->left != nullptr) {
@@ -168,8 +168,8 @@ void RBTree::rotateRight(Node *&node) {
     balanceMetadata(child);
 }
 
-void RBTree::rotateLeft(Node *&node) {
-    Node *child = node->right;
+void RBTree::rotateLeft(RBNode *&node) {
+    RBNode *child = node->right;
     node->right = child->left;
 
     if (node->right != nullptr) {
@@ -193,11 +193,11 @@ void RBTree::rotateLeft(Node *&node) {
     balanceMetadata(child);
 }
 
-void RBTree::fixInsert(Node *&node) {
+void RBTree::fixInsert(RBNode *&node) {
     while (node->parent && node->parent->color == Color::RED) {
-        Node *grandparent = node->parent->parent;
+        RBNode *grandparent = node->parent->parent;
         if (node->parent == grandparent->left) {
-            Node *uncle = grandparent->right;
+            RBNode *uncle = grandparent->right;
             if (uncle && uncle->color == Color::RED) {
                 node->parent->color = Color::BLACK;
                 uncle->color = Color::BLACK;
@@ -213,7 +213,7 @@ void RBTree::fixInsert(Node *&node) {
                 rotateRight(grandparent);
             }
         } else {
-            Node *uncle = grandparent->left;
+            RBNode *uncle = grandparent->left;
             if (uncle && uncle->color == Color::RED) {
                 node->parent->color = Color::BLACK;
                 uncle->color = Color::BLACK;
