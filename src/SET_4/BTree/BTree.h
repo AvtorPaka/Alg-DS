@@ -32,6 +32,20 @@ private:
     Node *root;
     int32_t t_;
     int32_t size_;
+
+    int64_t leafSumInternal(Node *node) const;
+
+    void splitChildInternal(Node *node, int32_t idx);
+
+    void insertInternal(Node *node, int32_t key);
+
+    void deleteNodesCascade(Node *node);
+
+    bool containsInternal(Node *node, int32_t key);
+
+    int32_t findKeyIndex(Node* node, int32_t key);
+
+    int32_t countNodesInternal(Node* node) const;
 };
 
 #endif // IMPLEMENTATIONDATA_BTREE_H
