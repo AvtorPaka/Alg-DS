@@ -46,3 +46,5 @@ CMakeLists.txt
 .clang-format
 src/main.cpp
 *.DS_STORE
+*.DS_Store
+.DS_Store
