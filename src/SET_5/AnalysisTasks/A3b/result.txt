@@ -1,0 +1,228 @@
+------------------------------
+Neutral hash elements for p = 0
+No such elements
+------------------------------
+Neutral hash elements for p = 1
+zF => Calculated hash: 0
+yG => Calculated hash: 0
+xH => Calculated hash: 0
+wI => Calculated hash: 0
+vJ => Calculated hash: 0
+uK => Calculated hash: 0
+tL => Calculated hash: 0
+sM => Calculated hash: 0
+rN => Calculated hash: 0
+qO => Calculated hash: 0
+pP => Calculated hash: 0
+oQ => Calculated hash: 0
+nR => Calculated hash: 0
+mS => Calculated hash: 0
+lT => Calculated hash: 0
+kU => Calculated hash: 0
+jV => Calculated hash: 0
+iW => Calculated hash: 0
+hX => Calculated hash: 0
+gY => Calculated hash: 0
+fZ => Calculated hash: 0
+Zf => Calculated hash: 0
+Yg => Calculated hash: 0
+Xh => Calculated hash: 0
+Wi => Calculated hash: 0
+Vj => Calculated hash: 0
+Uk => Calculated hash: 0
+Tl => Calculated hash: 0
+Sm => Calculated hash: 0
+Rn => Calculated hash: 0
+Qo => Calculated hash: 0
+Pp => Calculated hash: 0
+Oq => Calculated hash: 0
+Nr => Calculated hash: 0
+Ms => Calculated hash: 0
+Lt => Calculated hash: 0
+Ku => Calculated hash: 0
+Jv => Calculated hash: 0
+Iw => Calculated hash: 0
+Hx => Calculated hash: 0
+Gy => Calculated hash: 0
+Fz => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 2
+zS => Calculated hash: 0
+xT => Calculated hash: 0
+vU => Calculated hash: 0
+tV => Calculated hash: 0
+rW => Calculated hash: 0
+pX => Calculated hash: 0
+nY => Calculated hash: 0
+lZ => Calculated hash: 0
+Zc => Calculated hash: 0
+Xd => Calculated hash: 0
+Ve => Calculated hash: 0
+Tf => Calculated hash: 0
+Rg => Calculated hash: 0
+Ph => Calculated hash: 0
+Ni => Calculated hash: 0
+Lj => Calculated hash: 0
+Jk => Calculated hash: 0
+Hl => Calculated hash: 0
+Fm => Calculated hash: 0
+Dn => Calculated hash: 0
+Bo => Calculated hash: 0
+8t => Calculated hash: 0
+6u => Calculated hash: 0
+4v => Calculated hash: 0
+2w => Calculated hash: 0
+0x => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 3
+xX => Calculated hash: 0
+uY => Calculated hash: 0
+rZ => Calculated hash: 0
+Zb => Calculated hash: 0
+Wc => Calculated hash: 0
+Td => Calculated hash: 0
+Qe => Calculated hash: 0
+Nf => Calculated hash: 0
+Kg => Calculated hash: 0
+Hh => Calculated hash: 0
+Ei => Calculated hash: 0
+Bj => Calculated hash: 0
+9m => Calculated hash: 0
+6n => Calculated hash: 0
+3o => Calculated hash: 0
+0p => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 4
+xZ => Calculated hash: 0
+Xb => Calculated hash: 0
+Tc => Calculated hash: 0
+Pd => Calculated hash: 0
+Le => Calculated hash: 0
+Hf => Calculated hash: 0
+Dg => Calculated hash: 0
+8j => Calculated hash: 0
+4k => Calculated hash: 0
+0l => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 5
+Vb => Calculated hash: 0
+Qc => Calculated hash: 0
+Ld => Calculated hash: 0
+Ge => Calculated hash: 0
+Bf => Calculated hash: 0
+8h => Calculated hash: 0
+3i => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 6
+Za => Calculated hash: 0
+Tb => Calculated hash: 0
+Nc => Calculated hash: 0
+Hd => Calculated hash: 0
+Be => Calculated hash: 0
+6g => Calculated hash: 0
+0h => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 7
+Ya => Calculated hash: 0
+Rb => Calculated hash: 0
+Kc => Calculated hash: 0
+Dd => Calculated hash: 0
+6f => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 8
+Xa => Calculated hash: 0
+Pb => Calculated hash: 0
+Hc => Calculated hash: 0
+8e => Calculated hash: 0
+0f => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 9
+Wa => Calculated hash: 0
+Nb => Calculated hash: 0
+Ec => Calculated hash: 0
+3e => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 10
+Va => Calculated hash: 0
+Lb => Calculated hash: 0
+Bc => Calculated hash: 0
+8d => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 11
+Ua => Calculated hash: 0
+Jb => Calculated hash: 0
+4d => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 12
+Ta => Calculated hash: 0
+Hb => Calculated hash: 0
+0d => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 13
+Sa => Calculated hash: 0
+Fb => Calculated hash: 0
+9c => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 14
+Ra => Calculated hash: 0
+Db => Calculated hash: 0
+6c => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 15
+Qa => Calculated hash: 0
+Bb => Calculated hash: 0
+3c => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 16
+Pa => Calculated hash: 0
+0c => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 17
+Oa => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 18
+Na => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 19
+Ma => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 20
+La => Calculated hash: 0
+8b => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 21
+Ka => Calculated hash: 0
+6b => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 22
+Ja => Calculated hash: 0
+4b => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 23
+Ia => Calculated hash: 0
+2b => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 24
+Ha => Calculated hash: 0
+0b => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 25
+Ga => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 26
+Fa => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 27
+Ea => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 28
+Da => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 29
+Ca => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 30
+Ba => Calculated hash: 0
+------------------------------
+Neutral hash elements for p = 31
+Aa => Calculated hash: 0
