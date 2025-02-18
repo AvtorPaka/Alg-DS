@@ -130,6 +130,7 @@ bool BTree::containsInternal(Node *node, int32_t key) {
         }
         checkNode = checkNode->children[idx];
     }
+    return false;
 }
 
 int32_t BTree::findKeyIndex(Node* node, int32_t key) {
