@@ -1,6 +1,8 @@
 ## A3b. Вломщики!
 
-## Демченко Георгий Павлович , БПИ-235
+**Демченко Георгий Павлович , БПИ-235**
+
+[Условия](https://github.com/AvtorPaka/Alg-DS/blob/master/src/SET_5/AnalysisTasks/spec/spec_3.pdf)
 
 ```cpp
 size_t CustomHash(std::string key) {

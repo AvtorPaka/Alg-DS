@@ -1,6 +1,8 @@
 ## A2. Кубическое пробирование
 
-## Демченко Георгий Павлович , БПИ-235
+**Демченко Георгий Павлович , БПИ-235**
+
+[Условия](https://github.com/AvtorPaka/Alg-DS/blob/master/src/SET_5/AnalysisTasks/spec/spec_2.pdf)
 
 ### 1. Общий анализ
 

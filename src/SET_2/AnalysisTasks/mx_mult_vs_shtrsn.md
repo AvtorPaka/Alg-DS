@@ -1,10 +1,12 @@
 ## A3. Быстрее Штрассена!
 
-## Демченко Георгий Павлович , БПИ-235
+**Демченко Георгий Павлович , БПИ-235**
+
+[Условие](https://github.com/AvtorPaka/Alg-DS/blob/master/src/SET_2/AnalysisTasks/specs/spec_3.pdf)
 
 **Под "асимптотически более эффективный", будет пониматься верхняя оценка, т.е $O(f(n))$**
 
-## 1. $O(f(n))$ Штрассена
+### 1. $O(f(n))$ Штрассена
 
 $T_{sht}(n) = 7 \cdot T_{sht}(\frac{n}{2}) + \Theta(n^2) = 7 \cdot T_{sht}(\frac{n}{2}) + O(n^2)$
 
@@ -16,7 +18,7 @@ $\Rightarrow T_{sht}(n) = O(n^{log_{2}(7)})$
 
 $f_{sht}(n) = n^{log_{2}(7)}$
 
-## 2. $O(f(n))$ алгоримта $MULT$
+### 2. $O(f(n))$ алгоримта $MULT$
 
 $T_{mult}(n) = a \cdot T_{mult}(\frac{n}{4}) + \Theta(n^2) = a \cdot T_{mult}(\frac{n}{4}) + O(n^2) $
 
@@ -28,7 +30,7 @@ $log_{b}(a) = log_{4}{a}$
 
 $k = 2$
 
-### 1. $k = 2 > log_{4}{a}$
+#### 1. $k = 2 > log_{4}{a}$
 
 $a \in [1, 15]$
 
@@ -38,7 +40,7 @@ $\Rightarrow f_{mult}(n) = n^2 < n^{log_{2}(7)} = f_{sht}(n) \quad \forall \math
 
 $a \in [1, 15]$ - **Подходит**
 
-### 2. $k = 2 = log_{4}{a}$
+#### 2. $k = 2 = log_{4}{a}$
 
 $a = 16$
 
@@ -48,7 +50,7 @@ $\Rightarrow f_{mult}(n) = n^2 \cdot log_{2}(n) < n^{log_{2}(7)} = f_{sht}(n) \q
 
 $a = 16$ - **Подходит**
 
-### 3. $k = 2 < log_{4}{a}$
+#### 3. $k = 2 < log_{4}{a}$
 
 $a \geq 17$
 

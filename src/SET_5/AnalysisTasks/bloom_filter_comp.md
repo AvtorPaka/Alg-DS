@@ -1,6 +1,8 @@
 ## A4. Совместимость фильтров Блума 
 
-## Демченко Георгий Павлович , БПИ-235
+**Демченко Георгий Павлович , БПИ-235**
+
+[Условия](https://github.com/AvtorPaka/Alg-DS/blob/master/src/SET_5/AnalysisTasks/spec/spec_4.pdf)
 
 ### 1. $F(AB)$
 

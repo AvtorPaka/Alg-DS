@@ -1,6 +1,8 @@
 ## A2. Кратчайший блиц!
 
-### Демченко Георгий Павлович , БПИ-235
+**Демченко Георгий Павлович , БПИ-235**
+
+[Условие](https://github.com/AvtorPaka/Alg-DS/tree/master/src/SET_6/AnalysisTasks/A2/spec.pdf)
 
 ## 1. $DijkstraMULT(G, start)$
 
