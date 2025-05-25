@@ -3,29 +3,29 @@
 
 #include <vector>
 
-struct HuecoMundoPoint {
+struct TwoDimPoint {
 public:
     int64_t x;
     int64_t y;
 
-    HuecoMundoPoint(int64_t xa, int64_t ya) {
+    TwoDimPoint(int64_t xa, int64_t ya) {
         x = xa;
         y = ya;
     }
 
-    int64_t SquareDistance(const HuecoMundoPoint &other) const {
+    int64_t SquareDistance(const TwoDimPoint &other) const {
         return static_cast<int64_t>(std::pow((x - other.x), 2.0) + std::pow((y - other.y), 2.0));
     }
 };
 
 struct PointXComparator {
-    bool operator()(const HuecoMundoPoint &point1, const HuecoMundoPoint &point2) {
+    bool operator()(const TwoDimPoint &point1, const TwoDimPoint &point2) {
         return point1.x < point2.x;
     }
 };
 
 struct PointYComparator {
-    bool operator()(const HuecoMundoPoint &point1, const HuecoMundoPoint &point2) {
+    bool operator()(const TwoDimPoint &point1, const TwoDimPoint &point2) {
         return point1.y < point2.y;
     }
 };
@@ -100,18 +100,18 @@ public:
 
     static void IntervalMergeSort(std::vector<Interval> &shards, size_t left, size_t right);
 
-    static void ByakuyaBankai(std::vector<Interval> &shards, size_t n);
+    static void MaxIntervalOverlap(std::vector<Interval> &shards, size_t n);
 
     // Karatsuba 64 multiplication
-    static std::vector<int32_t> FirstAncientSkill(std::vector<int32_t> &numOne, std::vector<int32_t> &numTwo);
+    static std::vector<int32_t> KaratsubaMult(std::vector<int32_t> &numOne, std::vector<int32_t> &numTwo);
 
     // Strassen 32 algorithm
     static std::vector<std::vector<int64_t>>
-    SecondAncientSkill(std::vector<std::vector<int64_t>> &matrixOne, std::vector<std::vector<int64_t>> &matrixTwo,
+    StrassenMatrixMult(std::vector<std::vector<int64_t>> &matrixOne, std::vector<std::vector<int64_t>> &matrixTwo,
                        size_t n);
 
     // Minimal distance between set of 2-dimensional points
-    static int64_t TwoDimensionalHuecoMundoPassage(std::vector<HuecoMundoPoint> &points, int32_t left, int32_t right);
+    static int64_t TwoDimensionalPointsMinDistance(std::vector<TwoDimPoint> &points, int32_t left, int32_t right);
 };
 
 

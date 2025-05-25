@@ -27,7 +27,7 @@ void AlgorithmTasks::GunmanBuildMaxHeap(std::vector<int32_t> &gunmanArray) {
 }
 
 
-void AlgorithmTasks::GunmanHeapSort(std::vector<int32_t> &gunmanArray) {
+void AlgorithmTasks::HeapSort(std::vector<int32_t> &gunmanArray) {
     int32_t n = gunmanArray.size() - 1;
     GunmanBuildMaxHeap(gunmanArray);
 
@@ -39,7 +39,7 @@ void AlgorithmTasks::GunmanHeapSort(std::vector<int32_t> &gunmanArray) {
 }
 
 // Counting sort
-void AlgorithmTasks::StarDistanceCountingSort(std::vector<int32_t> &starDistanceArray) {
+void AlgorithmTasks::CountingSort(std::vector<int32_t> &starDistanceArray) {
     int32_t minDistance = std::pow(10.0, 6.0) + 1;
     int32_t maxDistance = -std::pow(10.0, 6.0) - 1;
 
@@ -154,12 +154,12 @@ void AlgorithmTasks::GunmanStableMerge(std::vector<std::pair<int32_t, int32_t>>&
     }
 }
 
-void AlgorithmTasks::GunmanStableMergeSort(std::vector<std::pair<int32_t, int32_t>>& gunmanArray, int32_t left, int32_t right) {
+void AlgorithmTasks::StableMergeSort(std::vector<std::pair<int32_t, int32_t>>& gunmanArray, int32_t left, int32_t right) {
     if (left < right) {
         int32_t middle = left + (right - left) / 2;
 
-        GunmanStableMergeSort(gunmanArray, left, middle);
-        GunmanStableMergeSort(gunmanArray, middle + 1, right);
+        StableMergeSort(gunmanArray, left, middle);
+        StableMergeSort(gunmanArray, middle + 1, right);
 
         GunmanStableMerge(gunmanArray, left, middle, right);
     }

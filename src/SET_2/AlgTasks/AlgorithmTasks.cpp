@@ -55,7 +55,7 @@ void AlgorithmTasks::IntervalMergeSort(std::vector<Interval> &shards, size_t lef
     }
 }
 
-void AlgorithmTasks::ByakuyaBankai(std::vector<Interval> &shards, size_t n) {
+void AlgorithmTasks::MaxIntervalOverlap(std::vector<Interval> &shards, size_t n) {
     IntervalMergeSort(shards, 0, n - 1);
 
     Interval maxInterval = Interval(1, 0);
@@ -107,7 +107,7 @@ AlgorithmTasks::NaiveMultiplication(const std::vector<int32_t> &numOne, const st
 }
 
 // KARATSUBA 64 multiplication
-std::vector<int32_t> AlgorithmTasks::FirstAncientSkill(std::vector<int32_t> &numOne, std::vector<int32_t> &numTwo) {
+std::vector<int32_t> AlgorithmTasks::KaratsubaMult(std::vector<int32_t> &numOne, std::vector<int32_t> &numTwo) {
     if (numOne.size() <= 64 || numTwo.size() <= 64) {
         return NaiveMultiplication(numOne, numTwo);
     }
@@ -135,12 +135,12 @@ std::vector<int32_t> AlgorithmTasks::FirstAncientSkill(std::vector<int32_t> &num
     std::vector<int32_t> b0(numTwo.begin(), numTwo.begin() + halfSize);
     std::vector<int32_t> b1(numTwo.begin() + halfSize, numTwo.end());
 
-    std::vector<int32_t> a1b1 = FirstAncientSkill(a1, b1);
-    std::vector<int32_t> a0b0 = FirstAncientSkill(a0, b0);
+    std::vector<int32_t> a1b1 = KaratsubaMult(a1, b1);
+    std::vector<int32_t> a0b0 = KaratsubaMult(a0, b0);
 
     std::vector<int32_t> a1a0Sum = SumNums(a1, a0);
     std::vector<int32_t> b1b0Sum = SumNums(b1, b0);
-    std::vector<int32_t> superMulti = FirstAncientSkill(a1a0Sum, b1b0Sum);
+    std::vector<int32_t> superMulti = KaratsubaMult(a1a0Sum, b1b0Sum);
 
     std::vector<int32_t> superSum = SumNums(a1b1, a0b0);
     std::vector<int32_t> preMiddleCoef = SubtractNums(superMulti, a1b1);
@@ -215,7 +215,7 @@ std::vector<int32_t> AlgorithmTasks::SumNums(std::vector<int32_t> &numOne, std::
 // Strassen 32 algorithm
 // | down
 // v
-std::vector<std::vector<int64_t>> AlgorithmTasks::SecondAncientSkill(std::vector<std::vector<int64_t>> &matrixOne,
+std::vector<std::vector<int64_t>> AlgorithmTasks::StrassenMatrixMult(std::vector<std::vector<int64_t>> &matrixOne,
                                                                      std::vector<std::vector<int64_t>> &matrixTwo,
                                                                      size_t n) {
     if (n <= 32) {
@@ -247,13 +247,13 @@ std::vector<std::vector<int64_t>> AlgorithmTasks::SecondAncientSkill(std::vector
     std::vector<std::vector<int64_t>> s9 = SubtractMatrixes(a11, a21, half);
     std::vector<std::vector<int64_t>> s10 = SumMatrixes(b11, b12, half);
 
-    std::vector<std::vector<int64_t>> p1 = SecondAncientSkill(a11, s1, half);
-    std::vector<std::vector<int64_t>> p2 = SecondAncientSkill(s2, b22, half);
-    std::vector<std::vector<int64_t>> p3 = SecondAncientSkill(s3, b11, half);
-    std::vector<std::vector<int64_t>> p4 = SecondAncientSkill(a22, s4, half);
-    std::vector<std::vector<int64_t>> p5 = SecondAncientSkill(s5, s6, half);
-    std::vector<std::vector<int64_t>> p6 = SecondAncientSkill(s7, s8, half);
-    std::vector<std::vector<int64_t>> p7 = SecondAncientSkill(s9, s10, half);
+    std::vector<std::vector<int64_t>> p1 = StrassenMatrixMult(a11, s1, half);
+    std::vector<std::vector<int64_t>> p2 = StrassenMatrixMult(s2, b22, half);
+    std::vector<std::vector<int64_t>> p3 = StrassenMatrixMult(s3, b11, half);
+    std::vector<std::vector<int64_t>> p4 = StrassenMatrixMult(a22, s4, half);
+    std::vector<std::vector<int64_t>> p5 = StrassenMatrixMult(s5, s6, half);
+    std::vector<std::vector<int64_t>> p6 = StrassenMatrixMult(s7, s8, half);
+    std::vector<std::vector<int64_t>> p7 = StrassenMatrixMult(s9, s10, half);
 
     std::vector<std::vector<int64_t>> p5p4 = SumMatrixes(p5, p4, half);
     std::vector<std::vector<int64_t>> p5p4p2 = SubtractMatrixes(p5p4, p2, half);
@@ -359,7 +359,7 @@ AlgorithmTasks::SplitMatrix(const std::vector<std::vector<int64_t>> &matrix, siz
 
 // Minimal distance between set of 2-dimensional points
 int64_t
-AlgorithmTasks::TwoDimensionalHuecoMundoPassage(std::vector<HuecoMundoPoint> &points, int32_t left, int32_t right) {
+AlgorithmTasks::TwoDimensionalPointsMinDistance(std::vector<TwoDimPoint> &points, int32_t left, int32_t right) {
     if (left >= right) {
         return INT64_MAX;
     }
@@ -368,13 +368,13 @@ AlgorithmTasks::TwoDimensionalHuecoMundoPassage(std::vector<HuecoMundoPoint> &po
     }
 
     int32_t mid = left + (right - left) / 2;
-    int64_t leftPartMinDistance = TwoDimensionalHuecoMundoPassage(points, left, mid);
-    int64_t rightPartMinDistance = TwoDimensionalHuecoMundoPassage(points, mid + 1, right);
+    int64_t leftPartMinDistance = TwoDimensionalPointsMinDistance(points, left, mid);
+    int64_t rightPartMinDistance = TwoDimensionalPointsMinDistance(points, mid + 1, right);
 
     int64_t minDistanceD = std::min(leftPartMinDistance, rightPartMinDistance);
     int64_t midPointX = points[mid].x;
 
-    std::vector<HuecoMundoPoint> connectivePoints;
+    std::vector<TwoDimPoint> connectivePoints;
 
 
     for (int32_t i = mid; i >= left; i--) {

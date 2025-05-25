@@ -24,16 +24,16 @@ private:
 
 public:
     // Heap sort with sink
-    static void GunmanHeapSort(std::vector<int32_t> &gunmanArray);
+    static void HeapSort(std::vector<int32_t> &gunmanArray);
 
     // Counting sort
-    static void StarDistanceCountingSort(std::vector<int32_t> &starDistanceArray);
+    static void CountingSort(std::vector<int32_t> &starDistanceArray);
 
     // Radix sort
     static void RadixSort(std::vector<int32_t> &numArray);
 
     // Stable merge sort
-    static void GunmanStableMergeSort(std::vector<std::pair<int32_t, int32_t>>& gunmanArray, int32_t left, int32_t right);
+    static void StableMergeSort(std::vector<std::pair<int32_t, int32_t>>& gunmanArray, int32_t left, int32_t right);
 
     // Monte Carlo binary matrix multiplication check
     static bool MonteCarloValidateMatrixMultiplication(const std::vector<std::string> &matrixA, const std::vector<std::string> &matrixB,
