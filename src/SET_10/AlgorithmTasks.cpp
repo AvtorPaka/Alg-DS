@@ -203,8 +203,244 @@ uint32_t AlgorithmTasks::FindMaxKnapsackCostWithWeightVolume(const std::vector<C
         }
 
         prevMaxCost = curMaxCost;
-        curMaxCost = std::vector<std::vector<uint32_t>>(maxWeight + 1, std::vector<uint32_t>(maxVolume + 1, 0));;
+        curMaxCost = std::vector<std::vector<uint32_t>>(maxWeight + 1, std::vector<uint32_t>(maxVolume + 1, 0));
     }
 
     return prevMaxCost[maxWeight][maxVolume];
+}
+
+std::vector<std::vector<uint64_t>> AlgorithmTasks::MultMatrix(const std::vector<std::vector<uint64_t>>& A, const std::vector<std::vector<uint64_t>>& B, uint32_t size, uint64_t& mod) {
+    std::vector<std::vector<uint64_t>> C(size, std::vector<uint64_t>(size, 0));
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            for (int l = 0; l < size; ++l) {
+                C[i][j] = (C[i][j] + A[i][l] * B[l][j]) % mod;
+            }
+        }
+    }
+    return C;
+}
+
+std::vector<std::vector<uint64_t>> AlgorithmTasks::PowMatrix(std::vector<std::vector<uint64_t>> A, uint64_t p, uint32_t size, uint64_t& mod) {
+    std::vector<std::vector<uint64_t>> res(size, std::vector<uint64_t>(size, 0));
+    for (int i = 0; i < size; ++i) {
+        res[i][i] = 1;
+    }
+
+    A[0][0] %= mod;
+
+    while (p > 0) {
+        if (p % 2 == 1) {
+            res = MultMatrix(res, A, size, mod);
+        }
+        A = MultMatrix(A, A, size, mod);
+        p /= 2;
+    }
+    return res;
+}
+
+std::vector<uint64_t> AlgorithmTasks::VecMultMatrix(const std::vector<std::vector<uint64_t>>& M, const std::vector<uint64_t>& vec, uint32_t size, uint64_t& mod) {
+    std::vector<uint64_t> res_vec(size, 0);
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            res_vec[i] = (res_vec[i] + M[i][j] * vec[j]) % mod;
+        }
+    }
+    return res_vec;
+}
+
+uint64_t AlgorithmTasks::CountNumberOfAuthenticNumSet(uint64_t n, uint32_t k, uint64_t& mod) {
+    if ( n == 0 || k == 0 ) {
+        return 0;
+    }
+    if (k == 1) {
+        if ( n == 1 ) {
+            return 1;
+        }
+        return 0;
+    }
+
+    if (n == 1) {
+        return k % mod;
+    }
+
+    uint32_t stateSize = 2 * k;
+
+    std::vector<uint64_t> baseS(stateSize);
+    for (uint32_t j = 0; j < k; ++j) {
+        baseS[2 * j] = j;
+        baseS[2 * j + 1] = (uint64_t)k - 1 - j;
+    }
+
+    if (n == 2) {
+        uint64_t sum = 0;
+        for (uint64_t val : baseS) {
+            sum = (sum + val) % mod;
+        }
+        return sum;
+    }
+
+    std::vector<std::vector<uint64_t>> T(stateSize, std::vector<uint64_t>(stateSize, 0));
+    for (uint32_t j_new = 0; j_new < k; ++j_new) {
+        for (uint32_t s_old = 0; s_old < j_new; ++s_old) {
+            T[2 * j_new][2 * s_old + 1] = 1;
+        }
+
+        for (uint32_t s_old = j_new + 1; s_old < k; ++s_old) {
+            T[2 * j_new + 1][2 * s_old] = 1;
+        }
+    }
+
+    uint64_t power = n - 2;
+    std::vector<std::vector<uint64_t>> T_pow_final = PowMatrix(T, power, stateSize, mod);
+    std::vector<uint64_t> S_n = VecMultMatrix(T_pow_final, baseS, stateSize, mod);
+
+    uint64_t ans = 0;
+    for (int32_t i = 0; i < S_n.size(); ++i) {
+        ans = (ans + S_n[i]) % mod;
+    }
+
+    return ans;
+}
+
+std::vector<std::vector<int32_t>> AlgorithmTasks::FindGoodGrid(uint32_t n, uint32_t m, int32_t c, uint32_t iterations) {
+    std::vector<std::vector<int32_t>> grid(n, std::vector<int32_t>(m, 0));
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int32_t> color_dis(1, c);
+    std::uniform_int_distribution<uint32_t> row_dis(0, n - 1);
+    std::uniform_int_distribution<uint32_t> col_dis(0, m - 1);
+
+    for (int32_t i = 0; i < n; ++i) {
+        for (int32_t j = 0; j < m; ++j) {
+            grid[i][j] = color_dis(gen);
+        }
+    }
+    uint32_t curSameColorRect = CountSameColorRectangles(grid, n, m);
+
+    for (int32_t iter = 0; iter < iterations && curSameColorRect > 0; ++iter) {
+        int32_t bestI = -1;
+        int32_t bestJ = -1;
+        int32_t bestNC = -1;
+        int32_t bestDiffDelt = 0;
+        bool hasImprovement = false;
+
+        for (int32_t i_check = 0; i_check < n && !hasImprovement; ++i_check) {
+            for (int32_t j_check = 0; j_check < m && !hasImprovement; ++j_check) {
+                int32_t initColor = grid[i_check][j_check];
+
+                for (int32_t newColor = 1; newColor <= c; ++newColor) {
+                    if (newColor == initColor) {
+                        continue;
+                    }
+                    int32_t delta = FindSameColorRectDeltaDiff(grid, n, m, i_check, j_check, initColor, newColor);
+
+                    if (delta < bestDiffDelt) {
+                        bestI = i_check;
+                        bestJ = j_check;
+                        bestNC = newColor;
+                        bestDiffDelt = delta;
+                    }
+
+                    if (delta < 0) {
+                        hasImprovement = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (bestI == -1) {
+            uint32_t randomI = row_dis(gen);
+            uint32_t randomJ = col_dis(gen);
+            int32_t randOldColor = grid[randomI][randomJ];
+            int32_t randNewColor = color_dis(gen);
+
+            while (randNewColor == randOldColor) {
+                randNewColor = color_dis(gen);
+            }
+
+            int32_t delta_for_random_move = FindSameColorRectDeltaDiff(grid, n, m, randomI, randomJ, randOldColor, randNewColor);
+            grid[randomI][randomJ] = randNewColor;
+            curSameColorRect += delta_for_random_move;
+
+            if (iter > 0 && iter % 50 == 0) {
+                curSameColorRect = CountSameColorRectangles(grid, n, m);
+            }
+        } else {
+            grid[bestI][bestJ] = bestNC;
+            curSameColorRect += bestDiffDelt;
+        }
+
+        if (curSameColorRect < 0) {
+            curSameColorRect = CountSameColorRectangles(grid, n, m);
+        }
+    }
+
+    if (curSameColorRect != 0) {
+        for (int32_t k = 0; k < 10; ++k) {
+            for (int32_t i = 0; i < n; ++i) {
+                for (int32_t j = 0; j < m; ++j) {
+                    grid[i][j] = color_dis(gen);
+                }
+            }
+            curSameColorRect = CountSameColorRectangles(grid, n, m);
+            if (curSameColorRect == 0) {
+                break;
+            }
+        }
+    }
+
+    return grid;
+}
+
+uint32_t AlgorithmTasks::CountSameColorRectangles(const std::vector<std::vector<int32_t>> &grid, uint32_t n, uint32_t m) {
+    uint32_t cnt = 0;
+
+    for (int32_t i = 0; i < n; ++i) {
+        for (int32_t i_s = i + 1; i_s < n; ++i_s) {
+            for (int32_t j = 0; j < m; ++j) {
+                for (int32_t j_s = j + 1; j_s < m; ++j_s) {
+                    if (grid[i][j] == grid[i_s][j] && grid[i][j] == grid[i][j_s] && grid[i][j] == grid[i_s][j_s]) {
+                        cnt++;
+                    }
+                }
+            }
+        }
+    }
+
+    return cnt;
+}
+
+int32_t AlgorithmTasks::FindSameColorRectDeltaDiff(const std::vector<std::vector<int32_t>> &grid, uint32_t n, uint32_t m, uint32_t iChanged,
+                           uint32_t jChanged, int32_t oldV, int32_t newV) {
+    if (oldV == newV) {
+        return 0;
+    }
+
+    int32_t delt = 0;
+    for (int32_t i = 0; i < n; ++i) {
+        if (i == iChanged) {
+            continue;
+        }
+        for (int32_t j = 0; j < m; ++j) {
+            if (j == jChanged) {
+                continue;
+            }
+
+            int32_t color_adjacent_row = grid[iChanged][j];
+            int32_t color_adjacent_col = grid[i][jChanged];
+            int32_t color_diagonal_opposite = grid[i][j];
+
+            if (color_adjacent_row == oldV && color_adjacent_col == oldV && color_diagonal_opposite == oldV) {
+                delt--;
+            }
+            if (color_adjacent_row == newV && color_adjacent_col == newV && color_diagonal_opposite == newV) {
+                delt++;
+            }
+        }
+    }
+
+    return delt;
 }
